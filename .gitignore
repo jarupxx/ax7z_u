@@ -17,3 +17,6 @@
 *.spi
 /test
 release.h
+/.vs
+*.VC.db
+*.opendb
