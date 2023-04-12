@@ -31,6 +31,8 @@ AString UnicodeStringToMultiByte(const UString &srcString, UINT codePage)
   AString resultString;
   if(!srcString.IsEmpty())
   {
+    // FIXME: Shift-JIS固定ではなく取得したコード ページ識別子を使用
+    codePage = 932;
     int numRequiredBytes = srcString.Length() * 2;
     char defaultChar = '_';
     int numChars = WideCharToMultiByte(codePage, 0, srcString, 

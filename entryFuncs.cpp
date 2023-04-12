@@ -87,8 +87,14 @@ void ExtManager::Init(const Conf& conf)
 
 bool ExtManager::IsEnable(LPSTR filename) const
 {
-	char buf[_MAX_EXT];
-	_splitpath(filename, NULL, NULL, NULL, buf);
+	char path_buffer[_MAX_PATH * 2];
+	char drive[_MAX_DRIVE];
+	char dir[_MAX_DIR * 2];
+	char fname[_MAX_FNAME * 2];
+	char buf[_MAX_EXT * 2];
+	errno_t err;
+	strcpy_s(path_buffer, _MAX_PATH * 2, filename);
+	err = _splitpath_s(path_buffer, drive, _MAX_DRIVE, dir, _MAX_DIR * 2, fname, _MAX_FNAME * 2, buf, _MAX_EXT * 2);
 	if(buf[0] == 0) buf[1] = 0; // guard
 	std::string sBuf(buf+1); // skip period
 	std::map<Ext, Info, NoCaseLess>::const_iterator ci = m_mTable.find(sBuf);
