@@ -4,6 +4,7 @@
 /00am.ncb
 /00am.suo
 /00am.v11.suo
+*.vcxproj.user
 /ax7z.aps
 /*.patch
 /*.zip
@@ -16,7 +17,6 @@
 .gitbranch
 *.spi
 /test
-release.h
 /.vs
 *.VC.db
 *.opendb
