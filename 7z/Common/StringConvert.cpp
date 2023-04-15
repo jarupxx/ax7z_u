@@ -31,16 +31,34 @@ AString UnicodeStringToMultiByte(const UString &srcString, UINT codePage)
   AString resultString;
   if(!srcString.IsEmpty())
   {
-    // FIXME: Shift-JIS固定ではなく取得したコード ページ識別子を使用
-    codePage = 932;
     int numRequiredBytes = srcString.Length() * 2;
     char defaultChar = '_';
-    int numChars = WideCharToMultiByte(codePage, 0, srcString, 
+    int numChars = WideCharToMultiByte(codePage, 0, srcString,
       srcString.Length(), resultString.GetBuffer(numRequiredBytes), 
       numRequiredBytes + 1, &defaultChar, NULL);
     #ifndef _WIN32_WCE
     if(numChars == 0)
       throw 282229;
+    #endif
+    resultString.ReleaseBuffer(numChars);
+  }
+  return resultString;
+}
+
+AString UnicodeStringToMultiByteLengthHack(const UString &srcString, UINT codePage)
+{
+  AString resultString;
+  if(!srcString.IsEmpty())
+  {
+    // FIXME: パス長とsrcString.length _capacity値のミスマッチ
+    int numRequiredBytes = srcString.Length() * 2;
+    char defaultChar = '_';
+    int numChars = WideCharToMultiByte(codePage, 0, srcString,
+        srcString.Length(), resultString.GetBuffer(numRequiredBytes),
+        numRequiredBytes + 1, &defaultChar, NULL);
+    #ifndef _WIN32_WCE
+    if (numChars == 0)
+        numChars = srcString.Length();
     #endif
     resultString.ReleaseBuffer(numChars);
   }
