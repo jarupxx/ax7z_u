@@ -285,7 +285,7 @@ int GetArchiveInfoEx(LPSTR filename, long len, HLOCAL *lphInf)
                 bError = true;
                 break;
             }
-            strcpy(&pinfo->path[iCurPos], (LPCSTR)s);
+            strcpy_s(&pinfo->path[iCurPos], 200, (LPCSTR)s);
             pinfo->path[iNextPos - 1] = '\\';
             iCurPos = iNextPos;
         }
@@ -298,7 +298,7 @@ int GetArchiveInfoEx(LPSTR filename, long len, HLOCAL *lphInf)
         if (s.Length() >= 200) {
             s = s.Left(199);
         }
-        strcpy(pinfo->filename, (LPCSTR)s);
+        strcpy_s(pinfo->filename, (LPCSTR)s);
 
         pinfo->crc = 0;
         if (S_OK == archiveHandler->GetProperty(i, kpidCRC, &property)) {
@@ -458,7 +458,7 @@ static int GetArchiveInfoWEx_impl(LPCWSTR filename, std::vector<fileInfoW>& vFil
                 bError = true;
                 break;
             }
-            wcscpy(&pinfo->path[iCurPos], (LPCWSTR)s);
+            wcscpy_s(&pinfo->path[iCurPos], 200, (LPCWSTR)s);
             pinfo->path[iNextPos - 1] = L'\\';
             iCurPos = iNextPos;
         }
@@ -471,7 +471,7 @@ static int GetArchiveInfoWEx_impl(LPCWSTR filename, std::vector<fileInfoW>& vFil
         if (s.Length() >= 200) {
             s = s.Left(199);
         }
-        wcscpy(pinfo->filename, (LPCWSTR)s);
+        wcscpy_s(pinfo->filename, (LPCWSTR)s);
         pinfo->crc = 0;
         if (S_OK == archiveHandler->GetProperty(i, kpidCRC, &property)) {
             if (property.vt == VT_UI4) {
