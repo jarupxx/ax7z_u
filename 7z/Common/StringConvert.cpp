@@ -50,15 +50,15 @@ AString UnicodeStringToMultiByteLengthHack(const UString &srcString, UINT codePa
   AString resultString;
   if(!srcString.IsEmpty())
   {
-    // FIXME: パス長とsrcString.length _capacity値のミスマッチ
-    int numRequiredBytes = srcString.Length() * 2;
+    // UTF8は3バイト長
+    int numRequiredBytes = srcString.Length() * 3;
     char defaultChar = '_';
     int numChars = WideCharToMultiByte(codePage, 0, srcString,
         srcString.Length(), resultString.GetBuffer(numRequiredBytes),
         numRequiredBytes + 1, &defaultChar, NULL);
     #ifndef _WIN32_WCE
     if (numChars == 0)
-        numChars = srcString.Length();
+        throw 282229;
     #endif
     resultString.ReleaseBuffer(numChars);
   }
