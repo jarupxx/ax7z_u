@@ -7,6 +7,6 @@ A susie plugin to extract 7z and other archives - modified version
 
 動作確認
 - あふｗ v1.66
-- MassiGra v0.45 (書庫内ファイル名が文字化け)
+- MassiGra v0.45
 - Leeyes v2.6.1 (UTF-8環境では使えない)
-- Susie 0.47b (ソリッド書庫不可)
+- Susie 0.47b (文字化け)
