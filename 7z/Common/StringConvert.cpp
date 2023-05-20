@@ -45,7 +45,7 @@ AString UnicodeStringToMultiByte(const UString &srcString, UINT codePage)
   return resultString;
 }
 
-AString UnicodeStringToMultiByteLengthHack(const UString &srcString, UINT codePage)
+AString UTF_8StringToMultiByteLength(const UString &srcString, UINT codePage)
 {
   AString resultString;
   if(!srcString.IsEmpty())

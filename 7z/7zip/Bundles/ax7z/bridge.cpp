@@ -279,7 +279,7 @@ int GetArchiveInfoEx(LPSTR filename, long len, HLOCAL *lphInf)
         bool bError = false;
         int iCurPos = 0;
         for (int j = 0; j < (vPaths.Size() - 1); ++j) {
-            AString s = UnicodeStringToMultiByteLengthHack(vPaths[j]);
+            AString s = UTF_8StringToMultiByteLength(vPaths[j]);
             int iNextPos = iCurPos + s.Length() + 1;
             if (iNextPos >= 200) {
                 bError = true;
@@ -294,7 +294,7 @@ int GetArchiveInfoEx(LPSTR filename, long len, HLOCAL *lphInf)
         }
         pinfo->path[iCurPos] = '\0';
         // filename        
-        AString s = UnicodeStringToMultiByteLengthHack(vPaths.Back());
+        AString s = UTF_8StringToMultiByteLength(vPaths.Back());
         if (s.Length() >= 200) {
             s = s.Left(199);
         }
