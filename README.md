@@ -10,3 +10,4 @@ A susie plugin to extract 7z and other archives - UTF-8 mod version
 - MassiGra v0.45
 - Leeyes v2.6.1 (UTF-8環境では使えない)
 - Susie 0.47b (文字化け)
+- MangaMeeya 7.4 UTF-8 mod
