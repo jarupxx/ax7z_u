@@ -1,5 +1,5 @@
-# ax7z - UTF-8 mod
-A susie plugin to extract 7z and other archives - modified version
+# ax7z_u - UTF-8 mod
+A susie plugin to extract 7z and other archives - UTF-8 mod version
 
 "Beta: Use Unicode UTF-8 for worldwide language support" でファイルを開けるようにしました。
 
