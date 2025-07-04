@@ -48,14 +48,14 @@
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.spi</TargetExt>
-    <TargetName>ax7z</TargetName>
+    <TargetName>ax7z_u</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.spi</TargetExt>
-    <TargetName>ax7z</TargetName>
+    <TargetName>ax7z_u</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -80,10 +80,10 @@
       <AdditionalDependencies>comctl32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(BOOST_ROOT)/stage/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>.\ax7z.def</ModuleDefinitionFile>
-      <ProgramDatabaseFile>.\Release/ax7z.pdb</ProgramDatabaseFile>
-      <ImportLibrary>.\Release/ax7z.lib</ImportLibrary>
+      <AdditionalLibraryDirectories>$(BOOST_ROOT)/lib32-msvc-14.3;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>.\ax7z_u.def</ModuleDefinitionFile>
+      <ProgramDatabaseFile>.\Release/ax7z_u.pdb</ProgramDatabaseFile>
+      <ImportLibrary>.\Release/ax7z_u.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Midl>
@@ -122,11 +122,11 @@
       <AdditionalDependencies>comctl32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(BOOST_ROOT)/stage/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <ModuleDefinitionFile>.\ax7z.def</ModuleDefinitionFile>
+      <AdditionalLibraryDirectories>$(BOOST_ROOT)/lib32-msvc-14.3;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>.\ax7z_u.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>.\Debug/ax7z.pdb</ProgramDatabaseFile>
-      <ImportLibrary>.\Debug/ax7z.lib</ImportLibrary>
+      <ProgramDatabaseFile>.\Debug/ax7z_u.pdb</ProgramDatabaseFile>
+      <ImportLibrary>.\Debug/ax7z_u.lib</ImportLibrary>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <Midl>
@@ -143,10 +143,10 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="ax7z.def" />
+    <None Include="ax7z_u.def" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ax7z.rc" />
+    <ResourceCompile Include="ax7z_u.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="entryFuncs.cpp">
@@ -408,7 +408,7 @@
     <ClInclude Include="sqlite3\sqlite3helper.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ax7z.txt" />
+    <Text Include="ax7z_u.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

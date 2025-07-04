@@ -5,10 +5,10 @@
 /00am.suo
 /00am.v11.suo
 *.vcxproj.user
-/ax7z.aps
+/ax7z_u.aps
 /*.patch
 /*.zip
-/ax7z.db
+/ax7z_u.db
 /test.db
 /dist.sh
 *.o

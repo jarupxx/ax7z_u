@@ -14,7 +14,7 @@ release.h: Makefile release.h.in
 dist: mkpatch
 	rm -rf $(DIR)
 	mkdir -p $(DIR)
-	cp -p Release/ax7z_s.spi ax7z_s.txt $(DIR)
+	cp -p Release/ax7z_u.spi ax7z_u.txt $(DIR)
 	(cd $(DIR); zip ../$(DIR).zip *)
 	rm -rf $(DIR)
 	

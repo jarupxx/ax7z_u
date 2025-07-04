@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by ax7z.rc
+// Used by ax7z_u.rc
 //
 #define IDV_VERSIONINFO                 1
 #define IDC_BROWSE_BUTTON               3
