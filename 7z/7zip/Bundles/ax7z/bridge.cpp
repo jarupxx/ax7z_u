@@ -279,13 +279,13 @@ int GetArchiveInfoEx(LPSTR filename, long len, HLOCAL *lphInf)
         bool bError = false;
         int iCurPos = 0;
         for (int j = 0; j < (vPaths.Size() - 1); ++j) {
-            AString s = UnicodeStringToMultiByte(vPaths[j]);
+            AString s = UTF_8StringToMultiByteLength(vPaths[j]);
             int iNextPos = iCurPos + s.Length() + 1;
             if (iNextPos >= 200) {
                 bError = true;
                 break;
             }
-            strcpy(&pinfo->path[iCurPos], (LPCSTR)s);
+            strcpy_s(&pinfo->path[iCurPos], 200, (LPCSTR)s);
             pinfo->path[iNextPos - 1] = '\\';
             iCurPos = iNextPos;
         }
@@ -294,11 +294,11 @@ int GetArchiveInfoEx(LPSTR filename, long len, HLOCAL *lphInf)
         }
         pinfo->path[iCurPos] = '\0';
         // filename        
-        AString s = UnicodeStringToMultiByte(vPaths.Back());
+        AString s = UTF_8StringToMultiByteLength(vPaths.Back());
         if (s.Length() >= 200) {
             s = s.Left(199);
         }
-        strcpy(pinfo->filename, (LPCSTR)s);
+        strcpy_s(pinfo->filename, (LPCSTR)s);
 
         pinfo->crc = 0;
         if (S_OK == archiveHandler->GetProperty(i, kpidCRC, &property)) {
@@ -458,7 +458,7 @@ static int GetArchiveInfoWEx_impl(LPCWSTR filename, std::vector<fileInfoW>& vFil
                 bError = true;
                 break;
             }
-            wcscpy(&pinfo->path[iCurPos], (LPCWSTR)s);
+            wcscpy_s(&pinfo->path[iCurPos], 200, (LPCWSTR)s);
             pinfo->path[iNextPos - 1] = L'\\';
             iCurPos = iNextPos;
         }
@@ -471,7 +471,7 @@ static int GetArchiveInfoWEx_impl(LPCWSTR filename, std::vector<fileInfoW>& vFil
         if (s.Length() >= 200) {
             s = s.Left(199);
         }
-        wcscpy(pinfo->filename, (LPCWSTR)s);
+        wcscpy_s(pinfo->filename, (LPCWSTR)s);
         pinfo->crc = 0;
         if (S_OK == archiveHandler->GetProperty(i, kpidCRC, &property)) {
             if (property.vt == VT_UI4) {

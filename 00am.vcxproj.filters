@@ -36,12 +36,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ax7z.def">
+    <None Include="ax7z_u.def">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ax7z.rc">
+    <ResourceCompile Include="ax7z_u.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -248,6 +248,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ax7z.txt" />
+    <Text Include="ax7z_u.txt" />
   </ItemGroup>
 </Project>

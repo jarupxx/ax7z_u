@@ -308,7 +308,7 @@ private:
 		return CallWithLockGuard(&SolidFileCacheMemory::AccessArchive_);
 	}
 	FileCache& m_cache;
-	mutable std::time_t& m_atime;
+	std::time_t& m_atime;
 public:
 	bool IsCached_(unsigned int index) const
 	{

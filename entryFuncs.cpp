@@ -87,8 +87,14 @@ void ExtManager::Init(const Conf& conf)
 
 bool ExtManager::IsEnable(LPSTR filename) const
 {
-	char buf[_MAX_EXT];
-	_splitpath(filename, NULL, NULL, NULL, buf);
+	char path_buffer[_MAX_PATH * 2];
+	char drive[_MAX_DRIVE];
+	char dir[_MAX_DIR * 2];
+	char fname[_MAX_FNAME * 2];
+	char buf[_MAX_EXT * 2];
+	errno_t err;
+	strcpy_s(path_buffer, _MAX_PATH * 2, filename);
+	err = _splitpath_s(path_buffer, drive, _MAX_DRIVE, dir, _MAX_DIR * 2, fname, _MAX_FNAME * 2, buf, _MAX_EXT * 2);
 	if(buf[0] == 0) buf[1] = 0; // guard
 	std::string sBuf(buf+1); // skip period
 	std::map<Ext, Info, NoCaseLess>::const_iterator ci = m_mTable.find(sBuf);
@@ -514,7 +520,7 @@ static bool CheckFileExtension(const char* pFileName, const char* pExtension)
 		return false;
 	}
 
-	return (strnicmp(pFileName + nFileNameLen - nExtensionLen, pExtension, nExtensionLen) == 0);
+	return (_strnicmp(pFileName + nFileNameLen - nExtensionLen, pExtension, nExtensionLen) == 0);
 }
 static bool CheckFileExtensionW(const wchar_t* pFileName, const wchar_t* pExtension)
 {
@@ -526,7 +532,7 @@ static bool CheckFileExtensionW(const wchar_t* pFileName, const wchar_t* pExtens
 		return false;
 	}
 
-	return (wcsnicmp(pFileName + nFileNameLen - nExtensionLen, pExtension, nExtensionLen) == 0);
+	return (_wcsnicmp(pFileName + nFileNameLen - nExtensionLen, pExtension, nExtensionLen) == 0);
 }
 
 //---------------------------------------------------------------------------
@@ -578,11 +584,11 @@ int GetArchiveInfoCache(char *filename, long len, HLOCAL *phinfo, fileInfo *pinf
 				if (ptmp->method[0] == '\0') return SPI_NO_FUNCTION;
 				// complete path relative to archive root
 				char path[sizeof(ptmp->path)+sizeof(ptmp->filename)];
-				strcpy(path, ptmp->path);
+				strcpy_s(path, ptmp->path);
 				size_t len = strlen(path);
 				if(len && path[len-1] != '/' && path[len-1] != '\\') // need delimiter
-					strcat(path, "\\");
-				strcat(path, ptmp->filename);
+					strcat_s(path, "\\");
+				strcat_s(path, ptmp->filename);
 				if (lstrcmpi(path, pinfo->filename) == 0) break;
 				ptmp++;
 			}
@@ -626,12 +632,12 @@ int GetArchiveInfoCacheW(wchar_t *filename, long len, HLOCAL *phinfo, fileInfoW 
 				if (ptmp->method[0] == '\0') return SPI_NO_FUNCTION;
 				// complete path relative to archive root
 				wchar_t path[sizeof(ptmp->path)+sizeof(ptmp->filename)];
-				wcscpy(path, ptmp->path);
+				wcscpy_s(path, ptmp->path);
 				size_t len = wcslen(path);
 				if(len && path[len-1] != L'/' && path[len-1] != L'\\') // need delimiter
-					wcscat(path, L"\\");
-				wcscat(path, ptmp->filename);
-				if (wcsicmp(path, pinfo->filename) == 0) break;
+					wcscat_s(path, L"\\");
+				wcscat_s(path, ptmp->filename);
+				if (_wcsicmp(path, pinfo->filename) == 0) break;
 				ptmp++;
 			}
 		} else {
@@ -697,7 +703,7 @@ int __stdcall GetFileInfoW
 		//ƒƒ‚ƒŠ“ü—Í‚É‚Í‘Î‰ž‚µ‚È‚¢
 		if ((flag & 7) != 0) return SPI_NO_FUNCTION;
 
-		wcscpy(lpInfo->filename, filename);
+		wcscpy_s(lpInfo->filename, filename);
 
 		return GetArchiveInfoCacheW(buf, len, NULL, lpInfo);
 	} catch(...) {

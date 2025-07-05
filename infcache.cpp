@@ -97,11 +97,11 @@ if (ret) {
 				}
 				// complete path relative to archive root
 				char path[sizeof(ptmp->path)+sizeof(ptmp->filename)];
-				strcpy(path, ptmp->path);
+				strcpy_s(path, ptmp->path);
 				size_t len = strlen(path);
 				if(len && path[len-1] != '/' && path[len-1] != '\\') // need delimiter
-					strcat(path, "\\");
-				strcat(path, ptmp->filename);
+					strcat_s(path, "\\");
+				strcat_s(path, ptmp->filename);
 				if (lstrcmpi(path, pinfo->filename) == 0) break;
 				ptmp++;
 			}
@@ -165,7 +165,7 @@ void InfoCacheW::Add(wchar_t *filepath, HLOCAL *ph)
 	cs.Enter();
 	if (arcinfo[nowno].hinfo) LocalFree(arcinfo[nowno].hinfo);
 	arcinfo[nowno].hinfo = *ph;
-	wcscpy(arcinfo[nowno].path, filepath);
+	wcscpy_s(arcinfo[nowno].path, filepath);
 	nowno = (nowno+1)%INFOCACHE_MAX;
 	cs.Leave();
 }
@@ -178,7 +178,7 @@ bool InfoCacheW::GetCache(wchar_t *filepath, HLOCAL *ph)
 	if (no < 0) no = INFOCACHE_MAX -1;
 	for (int i=0; i<INFOCACHE_MAX; i++) {
 		if (arcinfo[no].hinfo == NULL) break;
-		if (wcsicmp(arcinfo[no].path, filepath) == 0) {
+		if (_wcsicmp(arcinfo[no].path, filepath) == 0) {
 			*ph = arcinfo[no].hinfo;
 			ret = true;
 			break;
@@ -225,12 +225,12 @@ int InfoCacheW::Dupli(wchar_t *filepath, HLOCAL *ph, fileInfoW *pinfo)
 					}
 					// complete path relative to archive root
 					wchar_t path[sizeof(ptmp->path)+sizeof(ptmp->filename)];
-					wcscpy(path, ptmp->path);
+					wcscpy_s(path, ptmp->path);
 					size_t len = wcslen(path);
 					if(len && path[len-1] != L'/' && path[len-1] != L'\\') // need delimiter
-						wcscat(path, L"\\");
-					wcscat(path, ptmp->filename);
-					if (wcsicmp(path, pinfo->filename) == 0) break;
+						wcscat_s(path, L"\\");
+					wcscat_s(path, ptmp->filename);
+					if (_wcsicmp(path, pinfo->filename) == 0) break;
 					ptmp++;
 				}
 			} else {

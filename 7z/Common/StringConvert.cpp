@@ -33,12 +33,32 @@ AString UnicodeStringToMultiByte(const UString &srcString, UINT codePage)
   {
     int numRequiredBytes = srcString.Length() * 2;
     char defaultChar = '_';
-    int numChars = WideCharToMultiByte(codePage, 0, srcString, 
+    int numChars = WideCharToMultiByte(codePage, 0, srcString,
       srcString.Length(), resultString.GetBuffer(numRequiredBytes), 
       numRequiredBytes + 1, &defaultChar, NULL);
     #ifndef _WIN32_WCE
     if(numChars == 0)
       throw 282229;
+    #endif
+    resultString.ReleaseBuffer(numChars);
+  }
+  return resultString;
+}
+
+AString UTF_8StringToMultiByteLength(const UString &srcString, UINT codePage)
+{
+  AString resultString;
+  if(!srcString.IsEmpty())
+  {
+    // UTF8は3バイト長
+    int numRequiredBytes = srcString.Length() * 3;
+    char defaultChar = '_';
+    int numChars = WideCharToMultiByte(codePage, 0, srcString,
+        srcString.Length(), resultString.GetBuffer(numRequiredBytes),
+        numRequiredBytes + 1, &defaultChar, NULL);
+    #ifndef _WIN32_WCE
+    if (numChars == 0)
+        throw 282229;
     #endif
     resultString.ReleaseBuffer(numChars);
   }
